@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Jeu du pendu</title>
+</head>
+<body>
+    <button id="startGame">Jouer</button>
+    <div id="wordToFindSpace"></div>
+    <div id="placeToPlay">
+        <form action="#" method="post">
+            <label for="letterGuess">Propose une lettre</label>
+            <input type="text" name="letterGuess" id="letterGuess">
+            <input type="button" id="letterGuessBtn" value="Proposer cette lettre">
+        </form>
+        <form action="#" method="post">
+            <label for="wordGuess">Propose un mot</label>
+            <input type="text" name="wordGuess" id="wordGuess">
+            <input type="button" id="wordGuessBtn" value="Proposer ce mot">
+        </form>
+        <p>Lettres proposées :</p>
+        <p id="lettersTry"></p>
+        <div id="hanged"></div>
+    </div>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
