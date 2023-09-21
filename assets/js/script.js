@@ -54,6 +54,15 @@ letterGuessBtn.addEventListener('click', function () {
             document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
         }
     }
+    if (tryCount == 10){
+        alert('Perdu');
+        defeatsCount++;
+    }
+
+    //stocker la concat de chaque lettre via boucle (à chaque tour de boucle on concat la lettre suivante)
+    let letterFoundArray = document.querySelectorAll('#wordToFindSpace > div');
+    console.log(letterFoundArray);
+
 });
 
 
@@ -65,6 +74,10 @@ letterGuessBtn.addEventListener('click', function () {
 
 
 
+
+//Améliorations à ajouter :
+// - contrôler qu'il n'y a bien qu'une lettre proposée dans le champ lettre
+// - contrôler que c'est bien une lettre qui est proposé
 
 
 
