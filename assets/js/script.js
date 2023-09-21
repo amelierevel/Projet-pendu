@@ -41,12 +41,17 @@ letterGuessBtn.addEventListener('click', function () {
     document.getElementById('letterGuess').value = '';
 
     let letterFound = false;
+    let wordWrite = '';
+    let idLetter;
+
     for (a = 0; a < wordToFind.length; a++) {
+        idLetter = 'letter' + (a + 1);
         if (userLetter == wordToFind[a]) {
-            let idLetter = 'letter' + (a + 1);
             document.getElementById(idLetter).innerHTML = wordToFind[a];
             letterFound = true;
         }
+        wordWrite = wordWrite + document.getElementById(idLetter).innerHTML;
+        console.log(wordWrite);
     }
     if (!letterFound) {
         tryCount++;
@@ -54,22 +59,36 @@ letterGuessBtn.addEventListener('click', function () {
             document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
         }
     }
-    if (tryCount == 10){
+    if (tryCount == 10) {
         alert('Perdu');
         defeatsCount++;
     }
 
-    //stocker la concat de chaque lettre via boucle (à chaque tour de boucle on concat la lettre suivante)
-    let letterFoundArray = document.querySelectorAll('#wordToFindSpace > div');
-    console.log(letterFoundArray);
+    if (wordWrite == wordToFind) {
+        alert('Gagné !!');
+        victoriesCount++;
+    }
 
 });
-
 
 //Au clic sur le btn "Proposer un mot"
 // -> Récupération du mot proposé par l'utilisateur (userWord)
 // -> Si userWord == wordToFind alors afficher "Gagné" et incrémenter le compteur de victoires, sinon incrémenter le compteur de tentatives et afficher un élément au pendu
 // -> Si le compteur de tentatives atteint la valeur max (pendu complet), alors afficher "Perdu" et incrémenter le compteur de défaites
+wordGuessBtn.addEventListener('click', function () {
+    let userWord = wordGuess.value;
+    if (userWord == wordToFind){
+        alert('Gagné !');
+        victoriesCount++;
+    } else {
+        tryCount++;
+        if (tryCount > 0 && tryCount <= 10) {
+            document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
+        }
+    }
+});
+
+
 
 
 
@@ -78,6 +97,7 @@ letterGuessBtn.addEventListener('click', function () {
 //Améliorations à ajouter :
 // - contrôler qu'il n'y a bien qu'une lettre proposée dans le champ lettre
 // - contrôler que c'est bien une lettre qui est proposé
+// - contrôler l'entrée du champ mot
 
 
 
