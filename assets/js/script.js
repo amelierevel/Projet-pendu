@@ -40,20 +40,20 @@ letterGuessBtn.addEventListener('click', function () {
 
     document.getElementById('letterGuess').value = '';
 
+    let letterFound = false;
     for (a = 0; a < wordToFind.length; a++) {
         if (userLetter == wordToFind[a]) {
             let idLetter = 'letter' + (a + 1);
             document.getElementById(idLetter).innerHTML = wordToFind[a];
-        } else {
-            //le else n'est pas bon car il compte une erreur par lettre fausse dans le mot (soit mot de 4 lettres, 1 bonne et 3 fausses -> perd 3 vies)
-            tryCount++;
-            if (tryCount > 0 && tryCount <= 10) {
-                document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
-            }
+            letterFound = true;
         }
     }
-    
-
+    if (!letterFound) {
+        tryCount++;
+        if (tryCount > 0 && tryCount <= 10) {
+            document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
+        }
+    }
 });
 
 
@@ -70,14 +70,14 @@ letterGuessBtn.addEventListener('click', function () {
 
 // Pas utilisé
 // for (letterValue of wordToFind) {
-    //         let idLetter = 'letter' + (wordToFind.indexOf(letterValue) + 1);
-    //         if (userLetter == letterValue) {
-    //             document.getElementById(idLetter).innerHTML = letterValue;
-    //             tryCount--;
-    //         }else{
-    //         }
-    //     }
-    //     tryCount++;
-    //     if(tryCount > 0 && tryCount <= 10){
-    //         document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
-    //     }
+//         let idLetter = 'letter' + (wordToFind.indexOf(letterValue) + 1);
+//         if (userLetter == letterValue) {
+//             document.getElementById(idLetter).innerHTML = letterValue;
+//             tryCount--;
+//         }else{
+//         }
+//     }
+//     tryCount++;
+//     if(tryCount > 0 && tryCount <= 10){
+//         document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
+//     }
