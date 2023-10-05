@@ -24,7 +24,10 @@ startGameBtn.addEventListener('click', function () {
     document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
     document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
     gamesCount++;
+    lettersTry = [];
+    document.getElementById('lettersTry').innerHTML = '';
     tryCount = 0;
+    document.getElementById('hanged').src = 'assets/img/pendu' + tryCount + '.svg';
     wordToFind = wordsList[Math.round(Math.random() * (wordsList.length - 1))];
     // console.log(wordToFind);
     for (i = 1; i <= wordToFind.length; i++) {
@@ -71,17 +74,25 @@ letterGuessBtn.addEventListener('click', function () {
                 // document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
             }
         }
-        if (tryCount == 10) {
+        if (tryCount == 2) {
             document.getElementById('userDefeatsCountShown').innerHTML = gamesCount - userVictoriesCount;
             document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
-            alert('Perdu');
+            // alert('Perdu');
+            document.getElementById('container-game').style.display = 'none';
+            document.querySelector('h1').innerHTML = 'Perdu !!'
+            document.getElementById('container-start').style.display = 'flex';
+            document.getElementById('wordToFindSpace').innerHTML = '';
         }
 
         if (wordWrite == wordToFind) {
             userVictoriesCount++;
             document.getElementById('userVictoriesCountShown').innerHTML = userVictoriesCount;
             document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
-            alert('Gagné !!');
+            // alert('Gagné !!');
+            document.getElementById('container-game').style.display = 'none';
+            document.querySelector('h1').innerHTML = 'Gagné !!'
+            document.getElementById('container-start').style.display = 'flex';
+            document.getElementById('wordToFindSpace').innerHTML = '';
         }
     }
 });
