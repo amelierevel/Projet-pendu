@@ -1,5 +1,5 @@
 //Masquer les formulaires qui seront utiliser pour jouer une fois la partie démarrée
-placeToPlay.style.display = 'none';
+document.getElementById('container-game').style.display = 'none';
 
 //Déclaration du tableau contenant la liste des mots qui pourront être trouvés pour le jeu
 let wordsList = ['bonjour', 'chat', 'poule'];
@@ -24,8 +24,8 @@ startGameBtn.addEventListener('click', function () {
     for (i = 1; i <= wordToFind.length; i++) {
         document.getElementById('wordToFindSpace').innerHTML = document.getElementById('wordToFindSpace').innerHTML + '<div id="letter' + i + '">_</div>';
     }
-    startGameBtn.style.display = 'none';
-    placeToPlay.style.display = 'block';
+    document.getElementById('container-start').style.display = 'none';
+    document.getElementById('container-game').style.display = 'flex';
 });
 
 //Au clic sur le btn "Proposer cette lettre" 
@@ -60,7 +60,8 @@ letterGuessBtn.addEventListener('click', function () {
         if (!letterFound) {
             tryCount++;
             if (tryCount > 0 && tryCount <= 10) {
-                document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
+                document.getElementById('hanged').src = 'assets/img/pendu' + tryCount + '.svg';
+                // document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
             }
         }
         if (tryCount == 10) {
@@ -85,7 +86,6 @@ letterGuessBtn.addEventListener('click', function () {
 
 //Améliorations à ajouter :
 // - contrôler qu'il n'y a bien qu'une lettre proposée dans le champ lettre
-// - contrôler l'entrée du champ mot
 // - check que letter est pas déjà dans tableau pour éviter de reparcourir boucle
 // - voir pour methode indexOf (ou similaire qui récupère toutes les occurences) pour éviter boucle
 

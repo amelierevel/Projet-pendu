@@ -1,5 +1,101 @@
-#wordToFindSpace{
-    display: flex;
-    justify-content: space-around;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: url('../img/20201015_001.jpg');
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
 }
 
+#container-start{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h1{
+    margin-bottom: 50px;
+}
+
+button#startGame{
+    padding: 15px 60px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: #A0C9DB;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px #485b62;
+}
+
+button#startGame:hover{
+    background-color: #62741B;
+    box-shadow: 3px 3px 3px #3e4a12;
+    color: #ffffff;
+}
+
+#container-game{
+    height: 100vh;
+    font-size: 1.1rem;
+    /* width: 100vw; */
+    /* display: flex; */
+    justify-content: space-evenly;
+    /* align-items: center; */
+}
+#container-game > div{
+    width: 30vw;
+}
+
+#hanged-space{
+    align-self: flex-end;
+
+}
+
+img{
+    /* width: 50%; */
+}
+
+#placeToPlay{
+    height: 40vh;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#wordToFindSpace{
+    display: flex;
+    justify-content: space-between;
+    /* padding-top: 50px; */
+}
+
+#placeToPlay form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+#placeToPlay form input{
+    /* height: 25px; */
+    width: 50%;
+    padding: 5px;
+    border-radius: 5px;
+}
+#letterGuess{
+    margin: 10px 0;
+    border: 1px solid #000000;
+}
+#letterGuess::placeholder{
+    font-style: italic;
+    color: #485b62;
+}
+#letterGuessBtn{
+    background-color: #A0C9DB;
+    border: none;
+    box-shadow: 1px 1px 1px #485b62;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+}
