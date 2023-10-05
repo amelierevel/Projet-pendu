@@ -6,8 +6,7 @@ let wordsList = ['bonjour', 'chat', 'poule'];
 
 //Initialisation du compteur de victoires (victoriesCount) et de défaites (defeatsCount)
 let gamesCount = 0;
-let victoriesCount = 0;
-let defeatsCount = 0;
+let userVictoriesCount = 0;
 
 
 let wordToFind;
@@ -20,10 +19,10 @@ let lettersTry = [];
 // -> Masquer le btn "Jouer" et Afficher les formulaires pour permettre à l'utilisateur de jouer
 let startGameBtn = document.getElementById('startGame');
 startGameBtn.addEventListener('click', function () {
-    document.getElementById('userVictoriesCountShown').innerHTML = victoriesCount;
-    document.getElementById('userDefeatsCountShown').innerHTML = defeatsCount;
-    document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - defeatsCount;
-    document.getElementById('computerDefeatsCountShown').innerHTML = gamesCount - victoriesCount;
+    document.getElementById('userVictoriesCountShown').innerHTML = userVictoriesCount;
+    document.getElementById('userDefeatsCountShown').innerHTML = gamesCount - userVictoriesCount;
+    document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
+    document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
     gamesCount++;
     tryCount = 0;
     wordToFind = wordsList[Math.round(Math.random() * (wordsList.length - 1))];
@@ -41,6 +40,7 @@ startGameBtn.addEventListener('click', function () {
 // -> Si le compteur de tentatives atteint la valeur max (pendu complet), alors afficher "Perdu" et incrémenter le compteur de défaites
 // -> Si le mot est complètement reconstitué, alors afficher "Gagné" et incrémenter le compteur de victoires
 letterGuessBtn.addEventListener('click', function () {
+    document.getElementById('errorMessage').innerHTML = '';
     let userLetter = document.getElementById('letterGuess').value;
     if (!isNaN(userLetter) || userLetter.length != 1) {
         document.getElementById('errorMessage').innerHTML = 'Veuillez entrer une lettre';
@@ -72,18 +72,19 @@ letterGuessBtn.addEventListener('click', function () {
             }
         }
         if (tryCount == 10) {
+            document.getElementById('userDefeatsCountShown').innerHTML = gamesCount - userVictoriesCount;
+            document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
             alert('Perdu');
-            defeatsCount++;
-            document.getElementById('userDefeatsCountShown').innerHTML = defeatsCount;
         }
 
         if (wordWrite == wordToFind) {
+            userVictoriesCount++;
+            document.getElementById('userVictoriesCountShown').innerHTML = userVictoriesCount;
+            document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
             alert('Gagné !!');
-            victoriesCount++;
         }
     }
 });
-
 
 
 
