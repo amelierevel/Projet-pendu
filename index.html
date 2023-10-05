@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <!-- Feuille de style -->
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Jeu du pendu</title>
 </head>
@@ -20,22 +21,50 @@
     </div>
     <!-- 2ème écran -->
     <div id="container-game">
+        <!-- Bloc de gauche (textes) -->
         <div id="placeToPlay">
+            <div>
+                <h2>Jeu du pendu</h2>
+                <p>Pour gagner tu dois trouver le mot avant d'être pendu !</p>
+            </div>
+            <!-- div qui contiendra le mot à trouver -->
             <div id="wordToFindSpace"></div>
             <div>
                 <form action="#" method="post">
-                    <label for="letterGuess">Propose une lettre : </label>
-                    <input type="text" name="letterGuess" id="letterGuess" placeholder="a">
+                    <label for="letterGuess">Propose une lettre : </label>
+                    <input type="text" name="letterGuess" id="letterGuess" placeholder="a" maxlength="1">
                     <input type="button" id="letterGuessBtn" value="Proposer cette lettre">
                 </form>
-                <p>Lettres proposées :</p>
+                <p>Lettres proposées :</p>
+                <!-- paragraphe qui contiendra les lettres essayées par l'utilisateur -->
                 <p id="lettersTry"></p>
             </div>
+            <div id="victories-defeats-count">
+                <div>
+                    <h3>Tes victoires</h3>
+                    <!-- paragraphe qui contiendra les victoires de l'utilisateur -->
+                    <p id="userVictoriesCountShown"></p>
+                    <h3>Tes défaites</h3>
+                    <!-- paragraphe qui contiendra les défaites de l'utilisateur -->
+                    <p id="userDefeatsCountShown"></p>
+                </div>
+                <div>
+                    <h3>Les victoires de l'adversaire</h3>
+                    <!-- paragraphe qui contiendra les victoires de l'ordinateur -->
+                    <p id="computerVictoriesCountShown"></p>
+                    <h3>Les défaites de l'adversaire</h3>
+                    <!-- paragraphe qui contiendra les défaites de l'ordinateur -->
+                    <p id="computerDefeatsCountShown"></p>
+                </div>
+            </div>
         </div>
+        <!-- Bloc de droite (pendu) -->
         <div id="hanged-space">
+            <!-- image du pendu dont la source sera changée à chaque fausse proposée par l'utilisateur -->
             <img id="hanged" src="assets/img/pendu0.svg" alt="image du pendu">
         </div>
     </div>
+    <!-- Fichier JS -->
     <script src="assets/js/script.js"></script>
 </body>
 
