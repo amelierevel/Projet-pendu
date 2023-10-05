@@ -96,7 +96,6 @@ h3 {
 }
 
 input#letterGuess {
-    margin: 10px 0;
     border: 1px solid #252f33;
     font-family: 'Poppins', sans-serif;
 }
@@ -107,6 +106,12 @@ input#letterGuess::placeholder {
     color: #485b62;
 }
 
+/* Style du message d'erreur */
+#errorMessage{
+    color: #bd1616;
+    font-size: 0.9rem;
+}
+
 #letterGuessBtn {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
@@ -115,6 +120,7 @@ input#letterGuess::placeholder {
     background-color: #A0C9DB;
     border: none;
     box-shadow: 2px 2px 2px #485b62;
+    margin-top: 10px;
 }
 
 #letterGuessBtn:hover {

@@ -27,12 +27,14 @@
                 <h2>Jeu du pendu</h2>
                 <p>Pour gagner tu dois trouver le mot avant d'être pendu !</p>
             </div>
-            <!-- div qui contiendra le mot à trouver -->
+            <!-- div qui contiendra le mot à trouver  maxlength="1"-->
             <div id="wordToFindSpace"></div>
             <div>
                 <form action="#" method="post">
                     <label for="letterGuess">Propose une lettre : </label>
-                    <input type="text" name="letterGuess" id="letterGuess" placeholder="a" maxlength="1">
+                    <input type="text" name="letterGuess" id="letterGuess" placeholder="a">
+                    <!-- paragraphe qui contiendra le message d'erreur -->
+                    <p id="errorMessage"></p>
                     <input type="button" id="letterGuessBtn" value="Proposer cette lettre">
                 </form>
                 <p>Lettres proposées :</p>

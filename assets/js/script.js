@@ -5,8 +5,10 @@ document.getElementById('container-game').style.display = 'none';
 let wordsList = ['bonjour', 'chat', 'poule'];
 
 //Initialisation du compteur de victoires (victoriesCount) et de défaites (defeatsCount)
+let gamesCount = 0;
 let victoriesCount = 0;
 let defeatsCount = 0;
+
 
 let wordToFind;
 let tryCount;
@@ -18,9 +20,14 @@ let lettersTry = [];
 // -> Masquer le btn "Jouer" et Afficher les formulaires pour permettre à l'utilisateur de jouer
 let startGameBtn = document.getElementById('startGame');
 startGameBtn.addEventListener('click', function () {
+    document.getElementById('userVictoriesCountShown').innerHTML = victoriesCount;
+    document.getElementById('userDefeatsCountShown').innerHTML = defeatsCount;
+    document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - defeatsCount;
+    document.getElementById('computerDefeatsCountShown').innerHTML = gamesCount - victoriesCount;
+    gamesCount++;
     tryCount = 0;
     wordToFind = wordsList[Math.round(Math.random() * (wordsList.length - 1))];
-    console.log(wordToFind);
+    // console.log(wordToFind);
     for (i = 1; i <= wordToFind.length; i++) {
         document.getElementById('wordToFindSpace').innerHTML = document.getElementById('wordToFindSpace').innerHTML + '<div id="letter' + i + '">_</div>';
     }
@@ -35,8 +42,8 @@ startGameBtn.addEventListener('click', function () {
 // -> Si le mot est complètement reconstitué, alors afficher "Gagné" et incrémenter le compteur de victoires
 letterGuessBtn.addEventListener('click', function () {
     let userLetter = document.getElementById('letterGuess').value;
-    if (!isNaN(userLetter)) {
-        alert('Veuillez entrer une lettre');
+    if (!isNaN(userLetter) || userLetter.length != 1) {
+        document.getElementById('errorMessage').innerHTML = 'Veuillez entrer une lettre';
         document.getElementById('letterGuess').value = '';
     } else {
         lettersTry.push(userLetter);
@@ -55,7 +62,7 @@ letterGuessBtn.addEventListener('click', function () {
                 letterFound = true;
             }
             wordWrite = wordWrite + document.getElementById(idLetter).innerHTML;
-            console.log(wordWrite);
+            // console.log(wordWrite);
         }
         if (!letterFound) {
             tryCount++;
@@ -67,6 +74,7 @@ letterGuessBtn.addEventListener('click', function () {
         if (tryCount == 10) {
             alert('Perdu');
             defeatsCount++;
+            document.getElementById('userDefeatsCountShown').innerHTML = defeatsCount;
         }
 
         if (wordWrite == wordToFind) {
@@ -85,7 +93,6 @@ letterGuessBtn.addEventListener('click', function () {
 
 
 //Améliorations à ajouter :
-// - contrôler qu'il n'y a bien qu'une lettre proposée dans le champ lettre
 // - check que letter est pas déjà dans tableau pour éviter de reparcourir boucle
 // - voir pour methode indexOf (ou similaire qui récupère toutes les occurences) pour éviter boucle
 
