@@ -51,6 +51,7 @@ button#startGame:hover {
     font-size: 1.1rem;
     /* le display: flex; sera ajouté en JS */
     justify-content: space-evenly;
+    align-items: center;
 }
 
 h3 {
@@ -63,9 +64,22 @@ h3 {
 }
 
 /* ----Style du bloc de droite---- */
-/* Positionnement du bloc "pendu" en bas de la page */
-#hanged-space {
+#hanged-space{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Positionnement du bloc "pendu" en bas de la page. La class sera retirée en JS. */
+.hanged-position {
     align-self: flex-end;
+}
+
+#announcement-result-game {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 /* ----Style du bloc de gauche---- */
@@ -89,15 +103,26 @@ h3 {
     margin-bottom: 25px;
 }
 
-#placeToPlay form input {
+#placeToPlay form input, .btn-style {
     width: 50%;
     padding: 5px;
     border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-style{
+    font-weight: bold;
+    font-size: 1rem;
+    color: #252f33;
+    background-color: #A0C9DB;
+    border: none;
+    box-shadow: 2px 2px 2px #485b62;
+    margin-top: 10px;
 }
 
 input#letterGuess {
     border: 1px solid #252f33;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
 }
 
 /* Style du placeholder de l'input */
@@ -112,18 +137,7 @@ input#letterGuess::placeholder {
     font-size: 0.9rem;
 }
 
-#letterGuessBtn {
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-    color: #252f33;
-    background-color: #A0C9DB;
-    border: none;
-    box-shadow: 2px 2px 2px #485b62;
-    margin-top: 10px;
-}
-
-#letterGuessBtn:hover {
+.btn-style:hover{
     color: #ffffff;
     background-color: #62741B;
     box-shadow: 2px 2px 2px #3e4a12;

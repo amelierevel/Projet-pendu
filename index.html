@@ -35,7 +35,7 @@
                     <input type="text" name="letterGuess" id="letterGuess" placeholder="a">
                     <!-- paragraphe qui contiendra le message d'erreur -->
                     <p id="errorMessage"></p>
-                    <input type="button" id="letterGuessBtn" value="Proposer cette lettre">
+                    <input type="button" id="letterGuessBtn" class="btn-style" value="Proposer cette lettre">
                 </form>
                 <p>Lettres proposées :</p>
                 <!-- paragraphe qui contiendra les lettres essayées par l'utilisateur -->
@@ -60,10 +60,12 @@
                 </div>
             </div>
         </div>
-        <!-- Bloc de droite (pendu) -->
-        <div id="hanged-space">
+        <!-- Bloc de droite (pendu + annonce victoire/défaite/rejouer) -->
+        <div id="hanged-space" class="hanged-position">
             <!-- image du pendu dont la source sera changée à chaque fausse proposée par l'utilisateur -->
             <img id="hanged" src="assets/img/pendu0.svg" alt="image du pendu">
+            <p id="announcement-result-game"></p>
+            <button id="play-new-game" class="btn-style"></button>
         </div>
     </div>
     <!-- Fichier JS -->

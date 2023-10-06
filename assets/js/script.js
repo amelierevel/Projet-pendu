@@ -1,5 +1,6 @@
 //Masquer les formulaires qui seront utiliser pour jouer une fois la partie démarrée
 document.getElementById('container-game').style.display = 'none';
+document.getElementById('play-new-game').style.display = 'none';
 
 //Déclaration du tableau contenant la liste des mots qui pourront être trouvés pour le jeu
 let wordsList = ['bonjour', 'chat', 'poule'];
@@ -10,32 +11,29 @@ let userVictoriesCount = 0;
 
 
 let wordToFind;
-let tryCount;
+let tryCount = 0;
 let lettersTry = [];
 
 //Au clic sur le btn "Jouer" 
 // -> Initialisation du compteur de tentatives (max = 10) (tryCount)
 // -> Choix aléatoire du mot qui sera à trouver (wordToFind) et afficher son nombre de lettre
 // -> Masquer le btn "Jouer" et Afficher les formulaires pour permettre à l'utilisateur de jouer
-let startGameBtn = document.getElementById('startGame');
-startGameBtn.addEventListener('click', function () {
+document.getElementById('startGame').addEventListener('click', startGameFunction);
+
+function startGameFunction() {
     document.getElementById('userVictoriesCountShown').innerHTML = userVictoriesCount;
     document.getElementById('userDefeatsCountShown').innerHTML = gamesCount - userVictoriesCount;
     document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
     document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
     gamesCount++;
     lettersTry = [];
-    document.getElementById('lettersTry').innerHTML = '';
-    tryCount = 0;
-    document.getElementById('hanged').src = 'assets/img/pendu' + tryCount + '.svg';
     wordToFind = wordsList[Math.round(Math.random() * (wordsList.length - 1))];
-    // console.log(wordToFind);
     for (i = 1; i <= wordToFind.length; i++) {
         document.getElementById('wordToFindSpace').innerHTML = document.getElementById('wordToFindSpace').innerHTML + '<div id="letter' + i + '">_</div>';
     }
     document.getElementById('container-start').style.display = 'none';
     document.getElementById('container-game').style.display = 'flex';
-});
+}
 
 //Au clic sur le btn "Proposer cette lettre" 
 // -> Récupération de la lettre proposée par l'utilisateur (userLetter)
@@ -65,40 +63,59 @@ letterGuessBtn.addEventListener('click', function () {
                 letterFound = true;
             }
             wordWrite = wordWrite + document.getElementById(idLetter).innerHTML;
-            // console.log(wordWrite);
         }
+        
         if (!letterFound) {
             tryCount++;
+            console.log(tryCount);
             if (tryCount > 0 && tryCount <= 10) {
                 document.getElementById('hanged').src = 'assets/img/pendu' + tryCount + '.svg';
-                // document.getElementById('hanged').innerHTML = '<img src="assets/img/pendu' + tryCount + '.svg">';
             }
         }
-        if (tryCount == 2) {
+        if (tryCount == 4) {
             document.getElementById('userDefeatsCountShown').innerHTML = gamesCount - userVictoriesCount;
             document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
-            // alert('Perdu');
-            document.getElementById('container-game').style.display = 'none';
-            document.querySelector('h1').innerHTML = 'Perdu !!'
-            document.getElementById('container-start').style.display = 'flex';
-            document.getElementById('wordToFindSpace').innerHTML = '';
+           
+            document.getElementById('announcement-result-game').innerHTML = 'Perdu !';
+            document.getElementById('play-new-game').innerHTML = 'Rejouer une partie';
+            document.getElementById('hanged').style.display = 'none';
+            document.getElementById('play-new-game').style.display = 'block';
+            //Suppression de la class hanged-position pour permettre au contenu d'être centré
+            document.getElementById('hanged-space').classList.remove('hanged-position');
         }
 
         if (wordWrite == wordToFind) {
             userVictoriesCount++;
             document.getElementById('userVictoriesCountShown').innerHTML = userVictoriesCount;
             document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
-            // alert('Gagné !!');
-            document.getElementById('container-game').style.display = 'none';
-            document.querySelector('h1').innerHTML = 'Gagné !!'
-            document.getElementById('container-start').style.display = 'flex';
-            document.getElementById('wordToFindSpace').innerHTML = '';
+
+            document.getElementById('announcement-result-game').innerHTML = 'Gagné !!';
+            document.getElementById('play-new-game').innerHTML = 'Rejouer une partie';
+            document.getElementById('hanged').style.display = 'none';
+            document.getElementById('play-new-game').style.display = 'block';
+            //Suppression de la class hanged-position pour permettre au contenu d'être centré
+            document.getElementById('hanged-space').classList.remove('hanged-position');
+
+            // document.getElementById('container-start').style.display = 'flex';
+            // document.getElementById('wordToFindSpace').innerHTML = '';
         }
     }
 });
 
+//Appel de la fonction resetGame au clic sur le btn "Rejouer"
+document.getElementById('play-new-game').addEventListener('click', resetGameFunction);
 
-
+//Fonction resetGameFunction qui réinitialise le jeu et relance un nouveau mot à trouver 
+function resetGameFunction(){
+    document.getElementById('announcement-result-game').innerHTML = '';
+    document.getElementById('play-new-game').style.display = 'none';
+    tryCount = 0;
+    document.getElementById('hanged').style.display = 'block';
+    document.getElementById('hanged').src = 'assets/img/pendu' + tryCount + '.svg';
+    document.getElementById('wordToFindSpace').innerHTML = '';
+    document.getElementById('lettersTry').innerHTML = '';
+    startGameFunction();
+}
 
 
 
@@ -107,5 +124,6 @@ letterGuessBtn.addEventListener('click', function () {
 //Améliorations à ajouter :
 // - check que letter est pas déjà dans tableau pour éviter de reparcourir boucle
 // - voir pour methode indexOf (ou similaire qui récupère toutes les occurences) pour éviter boucle
+// - noter le gagné ou perdu à la place de l'image du pendu et y mettre un btn rejouer qui fait le reset et rappelle la fonction playGame (qu'il faudra mettre en fonction nommée au lieu de fonction anonyme)
 
 
