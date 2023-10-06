@@ -1,39 +1,70 @@
-//Masquer les formulaires qui seront utiliser pour jouer une fois la partie démarrée
+//----------Au chargement de la page 
+// --> On masque les éléments qui ne doivent pas être visibles : le 2ème écran et le btn "Rejouer"
 document.getElementById('container-game').style.display = 'none';
 document.getElementById('play-new-game').style.display = 'none';
 
-//Déclaration du tableau contenant la liste des mots qui pourront être trouvés pour le jeu
+// --> On déclare et initialise les différentes variables qui seront utiles au jeu 
+// -> un tableau contenant la liste +/- exhaustive des mots qui pourront être trouvés pour le jeu
 let wordsList = ['bonjour', 'chat', 'poule'];
-
-//Initialisation du compteur de victoires (victoriesCount) et de défaites (defeatsCount)
+// -> le compteur de partie et de victoires de l'utilisateur (les défaites de l'utilisateur et victoires/défaites de l'ordinateur pourront être déduites à partir de ces 2 variables)
 let gamesCount = 0;
 let userVictoriesCount = 0;
-
-
-let wordToFind;
+// -> un compteur d'essai
 let tryCount = 0;
+// -> un tableau vide qui contiendra les lettres proposées par l'utilisateur
 let lettersTry = [];
 
-//Au clic sur le btn "Jouer" 
-// -> Initialisation du compteur de tentatives (max = 10) (tryCount)
-// -> Choix aléatoire du mot qui sera à trouver (wordToFind) et afficher son nombre de lettre
-// -> Masquer le btn "Jouer" et Afficher les formulaires pour permettre à l'utilisateur de jouer
+// --> On déclare la variable "wordToFind". On lui affectera une valeur quand une partie sera initiée.
+let wordToFind;
+
+// -> On affiche le nombre de victoires/défaites de l'utilisateur et de l'ordinateur dans les éléments html dédiés
+document.getElementById('userVictoriesCountShown').innerHTML = userVictoriesCount;
+//le nombre de défaites de l'utilisateur équivaut à la différence entre le nombre de parties jouées et le nombre de victoires de l'utilisateur
+document.getElementById('userDefeatsCountShown').innerHTML = gamesCount - userVictoriesCount;
+//le nombre de victoires de l'ordinateur correspond au nombre de défaites de l'utilisateur (on utilise donc le même calcul)
+document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
+//le nombre de défaites de l'ordinateur correspond au nombre de victoires de l'utilisateur
+document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
+
+
+//----------Au clic sur le btn "Jouer" du 1er écran on appelle la fonction "startGameFunction"
 document.getElementById('startGame').addEventListener('click', startGameFunction);
 
+// --> On déclare la fonction "startGameFunction" qui initialise la 1ère partie (masque le 1er écran, affiche le 2e écran et définit le mot à trouver)
 function startGameFunction() {
-    document.getElementById('userVictoriesCountShown').innerHTML = userVictoriesCount;
-    document.getElementById('userDefeatsCountShown').innerHTML = gamesCount - userVictoriesCount;
-    document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
-    document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
+    // -> On incrémente le compteur de partie
     gamesCount++;
-    lettersTry = [];
-    wordToFind = wordsList[Math.round(Math.random() * (wordsList.length - 1))];
-    for (i = 1; i <= wordToFind.length; i++) {
-        document.getElementById('wordToFindSpace').innerHTML = document.getElementById('wordToFindSpace').innerHTML + '<div id="letter' + i + '">_</div>';
-    }
+
+    // -> On masque le 1er écran et on affiche le 2e écran
     document.getElementById('container-start').style.display = 'none';
     document.getElementById('container-game').style.display = 'flex';
+
+    // -> On appelle la fonction "findWordFunction" pour définir le mot à trouver
+    findWordFunction();
 }
+
+
+//----------Fonctions qui seront appelées à divers moments
+// -> On déclare la fonction "findWordFunction" qui définit le mot à trouver 
+function findWordFunction(){
+    // -> On affecte à "wordToFind" un mot choisit aléatoirement dans le tableau de mots. 
+    //la fonction "Math.random()..." retourne une valeur aléatoire entre 0 et la longueur du tableau. "Math.round()" permet d'arrondir cette valeur à l'entier le plus proche.
+    wordToFind = wordsList[Math.round(Math.random() * (wordsList.length - 1))];
+    
+    // -> On affiche un nombre de "_" correspondant au nombre de lettres contenues dans le mot à trouver
+    //pour un nombre "i" allant de 1 à x (nombre correspondant à la longueur du mot à trouver) avec un pas de 1...
+    for (i = 1; i <= wordToFind.length; i++) {
+        //...on écrit dans l'élément html dédié, le contenu de l'élément auquel on ajoute une div dont l'id contient le nombre "i". Ainsi si le mot à trouver contient 3 lettres, la boucle fera 3 tour (i=1, i=2, i=3) et la div#wordToFindSpace contiendra 3 "_" (div#letter1, div#letter2, div#letter3). Cela permettra d'identifier plus facilement les div à remplir en cas de bonne proposition
+        document.getElementById('wordToFindSpace').innerHTML = document.getElementById('wordToFindSpace').innerHTML + '<div id="letter' + i + '">_</div>';
+    }
+
+}
+
+
+
+
+
+
 
 //Au clic sur le btn "Proposer cette lettre" 
 // -> Récupération de la lettre proposée par l'utilisateur (userLetter)
@@ -77,7 +108,6 @@ letterGuessBtn.addEventListener('click', function () {
             document.getElementById('computerVictoriesCountShown').innerHTML = gamesCount - userVictoriesCount;
            
             document.getElementById('announcement-result-game').innerHTML = 'Perdu !';
-            document.getElementById('play-new-game').innerHTML = 'Rejouer une partie';
             document.getElementById('hanged').style.display = 'none';
             document.getElementById('play-new-game').style.display = 'block';
             //Suppression de la class hanged-position pour permettre au contenu d'être centré
@@ -90,17 +120,14 @@ letterGuessBtn.addEventListener('click', function () {
             document.getElementById('computerDefeatsCountShown').innerHTML = userVictoriesCount;
 
             document.getElementById('announcement-result-game').innerHTML = 'Gagné !!';
-            document.getElementById('play-new-game').innerHTML = 'Rejouer une partie';
             document.getElementById('hanged').style.display = 'none';
             document.getElementById('play-new-game').style.display = 'block';
             //Suppression de la class hanged-position pour permettre au contenu d'être centré
             document.getElementById('hanged-space').classList.remove('hanged-position');
-
-            // document.getElementById('container-start').style.display = 'flex';
-            // document.getElementById('wordToFindSpace').innerHTML = '';
         }
     }
 });
+
 
 //Appel de la fonction resetGame au clic sur le btn "Rejouer"
 document.getElementById('play-new-game').addEventListener('click', resetGameFunction);
@@ -114,6 +141,7 @@ function resetGameFunction(){
     document.getElementById('hanged').src = 'assets/img/pendu' + tryCount + '.svg';
     document.getElementById('wordToFindSpace').innerHTML = '';
     document.getElementById('lettersTry').innerHTML = '';
+    lettersTry = [];
     startGameFunction();
 }
 
@@ -122,8 +150,8 @@ function resetGameFunction(){
 
 
 //Améliorations à ajouter :
-// - check que letter est pas déjà dans tableau pour éviter de reparcourir boucle
+// - check que letter est pas déjà dans tableau pour éviter de reparcourir boucle et interdire de proposer 2 fois la même lettre
 // - voir pour methode indexOf (ou similaire qui récupère toutes les occurences) pour éviter boucle
-// - noter le gagné ou perdu à la place de l'image du pendu et y mettre un btn rejouer qui fait le reset et rappelle la fonction playGame (qu'il faudra mettre en fonction nommée au lieu de fonction anonyme)
+// - bloquer le rechargement de la page quand on appuie sur touche "Entrée" dans form de proposition de lettre
 
 

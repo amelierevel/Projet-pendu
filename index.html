@@ -14,58 +14,59 @@
 </head>
 
 <body>
-    <!-- 1er écran -->
+    <!-- 1er écran au chargement de la page -->
     <div id="container-start">
         <h1>Bienvenue dans le jeu du pendu</h1>
         <button id="startGame">Jouer</button>
     </div>
-    <!-- 2ème écran -->
+    <!-- 2ème écran qui apparait au clic sur le btn "Jouer" -->
     <div id="container-game">
-        <!-- Bloc de gauche (textes) -->
+        <!-- Bloc de gauche (textes + espace de jeu + compteur) -->
         <div id="placeToPlay">
             <div>
                 <h2>Jeu du pendu</h2>
                 <p>Pour gagner tu dois trouver le mot avant d'être pendu !</p>
             </div>
-            <!-- div qui contiendra le mot à trouver  maxlength="1"-->
+            <!-- div qui contiendra le mot à trouver (sera rempli en JS) -->
             <div id="wordToFindSpace"></div>
             <div>
                 <form action="#" method="post">
                     <label for="letterGuess">Propose une lettre : </label>
-                    <input type="text" name="letterGuess" id="letterGuess" placeholder="a">
-                    <!-- paragraphe qui contiendra le message d'erreur -->
+                    <input type="text" name="letterGuess" id="letterGuess" placeholder="a" maxlength="1">
+                    <!-- paragraphe qui contiendra le message d'erreur (sera rempli en JS) -->
                     <p id="errorMessage"></p>
                     <input type="button" id="letterGuessBtn" class="btn-style" value="Proposer cette lettre">
                 </form>
                 <p>Lettres proposées :</p>
-                <!-- paragraphe qui contiendra les lettres essayées par l'utilisateur -->
+                <!-- paragraphe qui contiendra les lettres essayées par l'utilisateur (sera rempli en JS) -->
                 <p id="lettersTry"></p>
             </div>
             <div id="victories-defeats-count">
                 <div>
                     <h3>Tes victoires</h3>
-                    <!-- paragraphe qui contiendra les victoires de l'utilisateur -->
+                    <!-- paragraphe qui contiendra les victoires de l'utilisateur (sera rempli en JS) -->
                     <p id="userVictoriesCountShown"></p>
                     <h3>Tes défaites</h3>
-                    <!-- paragraphe qui contiendra les défaites de l'utilisateur -->
+                    <!-- paragraphe qui contiendra les défaites de l'utilisateur (sera rempli en JS) -->
                     <p id="userDefeatsCountShown"></p>
                 </div>
                 <div>
                     <h3>Les victoires de l'adversaire</h3>
-                    <!-- paragraphe qui contiendra les victoires de l'ordinateur -->
+                    <!-- paragraphe qui contiendra les victoires de l'ordinateur (sera rempli en JS) -->
                     <p id="computerVictoriesCountShown"></p>
                     <h3>Les défaites de l'adversaire</h3>
-                    <!-- paragraphe qui contiendra les défaites de l'ordinateur -->
+                    <!-- paragraphe qui contiendra les défaites de l'ordinateur (sera rempli en JS) -->
                     <p id="computerDefeatsCountShown"></p>
                 </div>
             </div>
         </div>
-        <!-- Bloc de droite (pendu + annonce victoire/défaite/rejouer) -->
+        <!-- Bloc de droite (img pendu + annonce victoire/défaite/rejouer) -->
         <div id="hanged-space" class="hanged-position">
-            <!-- image du pendu dont la source sera changée à chaque fausse proposée par l'utilisateur -->
+            <!-- image du pendu dont la source sera changée à chaque mauvaise lettre proposée par l'utilisateur -->
             <img id="hanged" src="assets/img/pendu0.svg" alt="image du pendu">
+            <!-- paragraphe qui contiendra le résultat de la manche "Gagné/Perdu" (sera rempli en JS) -->
             <p id="announcement-result-game"></p>
-            <button id="play-new-game" class="btn-style"></button>
+            <button id="play-new-game" class="btn-style">Rejouer une partie</button>
         </div>
     </div>
     <!-- Fichier JS -->
