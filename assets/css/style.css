@@ -8,6 +8,7 @@
 body {
     background-image: url('../img/20201015_001.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
     font-family: 'Poppins', sans-serif;
     color: #252f33;
 }
@@ -19,10 +20,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 
 h1 {
     margin-bottom: 50px;
+    text-align: center;
 }
 
 /* Style du bouton qui lance le jeu */
@@ -145,3 +148,58 @@ input#letterGuess::placeholder {
     display: flex;
     justify-content: space-between;
 }
+
+/* ==========Responsive========== */
+@media screen and (max-width: 376px) {
+    #container-game{
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    
+    #container-game>div {
+        width: 90vw;
+    }
+    
+    img{
+        width: 80%;
+    }
+
+    #placeToPlay {
+        height: 50vh;
+        margin-top: 0px;
+    }
+    
+    #placeToPlay form {
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    #placeToPlay form label {
+        align-self: flex-start;
+    }
+
+    #placeToPlay form input, .btn-style {
+        width: 85%;
+    }
+
+    .btn-style{
+        margin-top: 5px;
+    }
+
+    #victories-defeats-count div:last-child{
+        display: none;
+    }
+
+    #victories-defeats-count div:first-child{
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #hanged-space{
+        justify-content: center;
+        height: 50vh;
+    }
+}
+
