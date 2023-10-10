@@ -167,14 +167,3 @@ function resetGameFunction(){
     lettersTry = [];
     startGameFunction();
 }
-
-
-
-
-
-//Améliorations à ajouter :
-// - check que letter est pas déjà dans tableau pour éviter de reparcourir boucle et interdire de proposer 2 fois la même lettre
-// - voir pour methode indexOf (ou similaire qui récupère toutes les occurences) pour éviter boucle
-// - bloquer le rechargement de la page quand on appuie sur touche "Entrée" dans form de proposition de lettre
-
-
